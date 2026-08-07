@@ -6,15 +6,23 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class Quiz07Controller {
 
+	//quiz07 원본
+//	@GetMapping("/quiz07/listTest")
+//	public String listTest(@RequestParam String type,
+//							Model model) {
 	
-	@GetMapping("/quiz07/listTest")
-	public String listTest(@RequestParam String type,
+	//quiz09로 인한 추가 변경사항
+	@GetMapping("/quiz07/listTest/{type}")
+	public String listTest(@PathVariable String type,
 							Model model) {
+	
+	
 		
 		// 1) type 값에 따라 구분해서 별도의 페이지로 연결
 		/*
@@ -53,8 +61,7 @@ public class Quiz07Controller {
 		
 		// 2) 동일한 페이지 사용 -> view 내부에서 type 값에 따라 동적으로 화면 구성
 		
-		
-		
+				
 		model.addAttribute("type", type);
 		
 		// 각 type 파라미터 기준으로 구분 -> 필요한 연산작업만 수행 
@@ -68,15 +75,15 @@ public class Quiz07Controller {
 			for(int i=1; i<=5; i++) {
 				memberList.add(new Member("아이디"+i, "비번"+i, "이름"+i));
 			}
-			
+
 			model.addAttribute("memberList", memberList);	
 		}
-		
-		
+
+
 		return "quiz/quiz07/listTest";
-		
-		
-		
+
+
+
 	}
-	
+
 }
