@@ -15,6 +15,7 @@
 	<c:forEach var="room" items="${roomList}">
 	
 		<p>
+		<a href="/admin/room/${room.roomId}">
 			${room.roomId} ${room.buildingName} ${room.roomNumber} ${room.floor} ${room.maxGuestCount} ${room.viewType}
 	
 			<c:choose>
@@ -22,6 +23,7 @@
 				<c:when test="${room.viewType == 'CTY'}">시티뷰</c:when>
 				<c:when test="${room.viewType == 'MOT'}">마운틴뷰</c:when>
 			</c:choose>
+		</a>
 		</p>
 	
 	</c:forEach>

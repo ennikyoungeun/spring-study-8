@@ -37,12 +37,21 @@ public class RoomDAOImpl implements RoomDAO {
 	@Override
 	public int saveRoom(Room room) {
 		
-		// DB에 room정보 테이블에 room 정보를 저장
+		// DB에 room 정보 테이블에 room 정보를 저장
 								//실행할 쿼리 위치의 식별자, 매개변수 
 		int result = sqlSessionTemplate.insert("room_mapper.saveRoom",room);
 		//수행 적용된 행의 수
 		
 		return result;
+	}
+
+	@Override
+	public Room findRoomByRoomId(int roomId) {
+		// TODO Auto-generated method stub
+		
+		Room room = sqlSessionTemplate.selectOne("room_mapper.findRoomByRoomId", roomId);
+		
+		return room;
 	}
 	
 }
