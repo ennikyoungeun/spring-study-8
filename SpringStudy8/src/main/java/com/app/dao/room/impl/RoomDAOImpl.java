@@ -39,26 +39,34 @@ public class RoomDAOImpl implements RoomDAO {
 		
 		// DB에 room 정보 테이블에 room 정보를 저장
 								//실행할 쿼리 위치의 식별자, 매개변수 
-		int result = sqlSessionTemplate.insert("room_mapper.saveRoom",room);
+		int result = sqlSessionTemplate.insert("room_mapper.saveRoom", room);
 		//수행 적용된 행의 수
-		
+
 		return result;
 	}
 
 	@Override
 	public Room findRoomByRoomId(int roomId) {
 		// TODO Auto-generated method stub
-		
-		Room room = sqlSessionTemplate.selectOne("room_mapper.findRoomByRoomId", roomId);
-		
+
+		Room room = sqlSessionTemplate.selectOne("room_mapper.findRoomByRoomId",  roomId);
+
 		return room;
 	}
 
 	@Override
 	public int removeRoom(int roomId) {
-		
+
 		//delete 삭제쿼리 -> return 적용된 행의 갯수
 		int result = sqlSessionTemplate.delete("room_mapper.removeRoom", roomId);
+
+		return result;
+	}
+
+	@Override
+	public int modifyRoom(Room room) {
+		
+		int result = sqlSessionTemplate.update("room_mapper.modifyRoom", room);
 		
 		return result;
 	}
