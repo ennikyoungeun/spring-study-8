@@ -23,5 +23,12 @@
 		select * from T_User
 		where id = #{id}
 	</select>
+	
+	<select id="checkUserLogin" resultType="User" parameterType="User">
+		select * from T_User
+		where id = #{id}
+		and pw= #{pw}
+		and user_type = #{userType}
+	</select>
 
 </mapper>

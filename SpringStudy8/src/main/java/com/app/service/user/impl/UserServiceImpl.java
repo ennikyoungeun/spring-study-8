@@ -66,24 +66,30 @@ public class UserServiceImpl implements UserService {
 		
 		//해당 id로 DB에서 계정정보를 조회 <-> id pw 비교
 		
-		User loginUser = userDAO.findUserById(user.getId());
 		
-		//if(loginUser == null) { // 아이디가 없다
-		//loginUser != null ->pw 비교 -> 틀렸다 -> 아이디는 있는데 , 비번이 틀렸다.
+		//로그인처리 케이스 1) DB에서 User 정보조회 -> 서비스계층에서 상태비교 수행
 		
-		//다 성공할때만 user객체 리턴
-		if(loginUser != null //해당 id로 db에 데이터가 있다
-				&& user.getPw().equals(loginUser.getPw()) //비번이 일치
-				&& user.getUserType().equals(loginUser.getUserType())//userType이 일치한다
-				) {
-			//로그인성공
-			
-			return loginUser;
-		}
-		//로그인 실패시
-		return null;
+		/*
+		 * User loginUser = userDAO.findUserById(user.getId());
+		 * 
+		 * //if(loginUser == null) { // 아이디가 없다 //loginUser != null ->pw 비교 -> 틀렸다 ->
+		 * 아이디는 있는데 , 비번이 틀렸다.
+		 * 
+		 * //다 성공할때만 user객체 리턴 if(loginUser != null //해당 id로 db에 데이터가 있다 &&
+		 * user.getPw().equals(loginUser.getPw()) //비번이 일치 &&
+		 * user.getUserType().equals(loginUser.getUserType())//userType이 일치한다 ) {
+		 * //로그인성공
+		 * 
+		 * return loginUser; } //로그인 실패시 return null;
+		 * 
+		 * //성공 or 실패시 사유 코드화 1 성공 2 비번틀렸고 3 아이디 없고 4 휴면계정 5 정지
+		 * 
+		 */
 		
-		//성공 or 실패시 사유 코드화 1 성공 2 비번틀렸고 3 아이디 없고 4 휴면계정 5 정지
+		//로그인처리 케이스 2) DB 쿼이에서 정보일치여부 비교수행
+		User loginUser = userDAO.checkUserLogin(user);
+		
+		return loginUser;
 		}
 	
 	@Override
