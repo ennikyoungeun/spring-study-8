@@ -1,10 +1,13 @@
 package com.app.controller.customer;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.app.common.CommonCode;
 import com.app.dto.user.User;
 import com.app.service.user.UserService;
 
@@ -38,4 +41,49 @@ public class CustomerController {
 		}
 	}
 
+	
+	@GetMapping("/customer/signin")
+	public String signin() {
+		return "customer/signin";
+	}
+	
+	@PostMapping("/customer/signin")
+	public String signinAction(User user, HttpSession session) {
+		
+		//로그인처리 로직
+		
+		System.out.println("로그인식 입력한값");
+		System.out.println(user);
+		
+		// 사용자가 입력한 아이디 패스워드 ->DB비교
+		
+		
+		//id pw 맞으면 로그인 성공?
+		//userType 까지 비교 -> 일반인과 관리자 사용페이지 구분.
+		
+		user.setUserType(CommonCode.USER_USETYPE_CUSTOMER);
+		User loginUser = userService.checkUserLogin(user);
+		
+		//성공 //실패
+		
+		if(loginUser == null) { //실패
+			System.out.println("로그인 실패");
+			return "customer/signin";
+		}else { // 성공
+			System.out.println("로그인 성공");
+			System.out.println(loginUser);
+			
+			//로그인 성공 -> 세션에 아이디 저장
+			session.setAttribute("loginUserId", loginUser.getId());
+			
+			return "redirect:/main"; 
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 }

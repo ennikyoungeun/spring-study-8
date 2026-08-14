@@ -18,5 +18,10 @@
 	<select id="findUserList" resultType="User">
 		select * from T_User
 	</select>
+	
+	<select id="findUserById" resultType="User" parameterType="String">
+		select * from T_User
+		where id = #{id}
+	</select>
 
 </mapper>

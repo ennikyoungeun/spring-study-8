@@ -13,6 +13,7 @@ public interface UserService {
 	
 	public List<User> findUserList();
 	
-	void register(User user);
+	public User checkUserLogin(User user);
+	public User findUserById(String id);
 	
 }
