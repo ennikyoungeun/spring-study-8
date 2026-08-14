@@ -13,4 +13,6 @@ public interface UserService {
 	
 	public List<User> findUserList();
 	
+	void register(User user);
+	
 }

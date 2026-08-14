@@ -53,4 +53,12 @@ public class UserServiceImpl implements UserService {
 		
 		return userList;
 	}
+	
+	@Override
+    public void register(User user) {
+        
+        userDAO.saveUser(user); 
+    }
+	
+	
 }
