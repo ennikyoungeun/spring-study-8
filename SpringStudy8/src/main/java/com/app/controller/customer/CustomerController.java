@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.app.common.CommonCode;
 import com.app.dto.user.User;
 import com.app.service.user.UserService;
+import com.app.util.LoginManager;
 
 @Controller
 public class CustomerController {
@@ -44,8 +45,11 @@ public class CustomerController {
 
 	
 	@GetMapping("/customer/signin")
-	public String signin() {
-		return "customer/signin";
+	public String signin(HttpSession session) {
+		   if (session.getAttribute("loginUserId") != null) {
+		        return "redirect:/customer/mypage";
+		    }
+		    return "customer/signin";
 	}
 	
 	@PostMapping("/customer/signin")
@@ -64,7 +68,9 @@ public class CustomerController {
 		
 		user.setUserType(CommonCode.USER_USETYPE_CUSTOMER);
 		User loginUser = userService.checkUserLogin(user);
-		
+		if (session.getAttribute("loginUserId") != null) {
+	        return "redirect:/customer/mypage";
+	    }
 		//성공 //실패
 		
 		if(loginUser == null) { //실패
@@ -75,8 +81,8 @@ public class CustomerController {
 			System.out.println(loginUser);
 			
 			//로그인 성공 -> 세션에 아이디 저장
-			session.setAttribute("loginUserId", loginUser.getId());
-			
+			//session.setAttribute("loginUserId", loginUser.getId());
+			LoginManager.setSessionLoginUserId(session, loginUser.getId());
 			//return "redirect:/main"; 
 			return "redirect:/customer/mypage"; //로그인 성공후 마이페이지로 연결 
 		}
@@ -91,10 +97,11 @@ public class CustomerController {
 
 		// 아이디를 기반으로 조회
 
-		if (session.getAttribute("loginUserId") != null) { // 로그인 상태
-
-			String loginUserId = session.getAttribute("loginUserId").toString();
-
+		//if (session.getAttribute("loginUserId") != null) { // 로그인 상태
+		if(LoginManager.isLogin(session)) {
+			
+			//String loginUserId = session.getAttribute("loginUserId").toString();
+			String loginUserId =LoginManager.getLoginUserId(session);
 			User user = userService.findUserById(loginUserId);
 			
 			//view 전달
@@ -113,7 +120,8 @@ public class CustomerController {
 	public String signout(HttpSession session) {
 		
 		//세션 초기화
-		session.invalidate();
+		//session.invalidate();
+		LoginManager.logout(session);
 		
 		return "redirect:/main";
 	}
