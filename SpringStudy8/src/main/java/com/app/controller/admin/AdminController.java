@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.dto.room.Room;
+import com.app.dto.room.RoomSearchCondition;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
@@ -43,7 +44,6 @@ public class AdminController {
 		
 		int result = roomService.saveRoom(room);
 		
-		
 		//result 값 확인 -> 성공/실패 -> 진행
 		System.out.println("insert 처리결과 리턴받은 적용된 행의 수: "+ result);
 		
@@ -52,19 +52,34 @@ public class AdminController {
 		}else {//저장실패
 			return "/admin/registerRoom";
 		}
-		
 	}
+
+	/*
+	 * //관리자가 객실관힌 전체 객실 목록 조회
+	 * 
+	 * @GetMapping("/admin/rooms") public String rooms(Model model) {
+	 * 
+	 * //rooms 페이지 // T_ROOM 테이블 객실데이터 -> 조회 -> view 전달 -> 표시
+	 * 
+	 * List<Room> roomList = roomService.findRoomList();
+	 * 
+	 * model.addAttribute("roomList", roomList);
+	 * 
+	 * return "admin/rooms"; }
+	 */
 	
 	//관리자가 객실관힌 전체 객실 목록 조회
 	@GetMapping("/admin/rooms")
-	public String rooms(Model model) {
+	public String rooms(Model model, RoomSearchCondition roomSearchCondition) {
+		
 		
 		//rooms 페이지
 		// T_ROOM 테이블 객실데이터 -> 조회 -> view 전달 -> 표시
 		
-		List<Room> roomList = roomService.findRoomList();
+		List<Room> roomList = roomService.findRoomListBySearchCondition(roomSearchCondition);
 		
 		model.addAttribute("roomList", roomList);
+		model.addAttribute("roomSearchCondition", roomSearchCondition);
 		
 		return "admin/rooms";
 	}
@@ -150,6 +165,8 @@ public class AdminController {
 			
 			
 		}
+		
+		
 	
 		
 		
