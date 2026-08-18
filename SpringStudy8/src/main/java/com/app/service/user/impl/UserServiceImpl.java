@@ -99,6 +99,12 @@ public class UserServiceImpl implements UserService {
 		
 		return user;
 	}
+
+	@Override
+	public int modifyUserPassword(User user) {
+	
+		return userDAO.modifyUserPassword(user);
+	}
 	
 	
 }

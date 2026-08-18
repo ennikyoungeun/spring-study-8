@@ -47,5 +47,13 @@ public class UserDAOImpl implements UserDAO {
 		 User loginUser = sqlSessionTemplate.selectOne("user_mapper.checkUserLogin", user);
 		return loginUser;
 	}
+	
+    @Override
+    public int modifyUserPassword(User user) {
+    
+        int result = sqlSessionTemplate.update("user_mapper.modifyUserPassword", user);
+        return result;
+    }
+
 
 }

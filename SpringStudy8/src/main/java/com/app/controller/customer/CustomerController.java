@@ -128,6 +128,43 @@ public class CustomerController {
 	
 	
 	
+	   @GetMapping("/customer/modifyPw")
+	   public String modifyPw(HttpSession session) {
+	   
+	      if (!LoginManager.isLogin(session)) {
+	         return "redirect:/customer/signin";
+	      }
+	      return "customer/modifyPw";
+	   }
+	   @PostMapping("/customer/modifyPw")
+	   public String modifyPwAction(User user, HttpSession session) {
+	      // 로그인 체크
+	      if (!LoginManager.isLogin(session)) {
+	         return "redirect:/customer/signin";
+	      }
+	  
+	      // 1. 현재 세션에 저장된 로그인 유저 아이디 획득
+	      String loginUserId = LoginManager.getLoginUserId(session);
+	      user.setId(loginUserId); 
+	  
+	      int result = userService.modifyUserPassword(user); 
+	      
+	      if (result > 0) {
+	         System.out.println("비밀번호 변경 성공! 재로그인을 위해 로그아웃 처리합니다.");
+	         
+	         // 4. 비밀번호가 변경되었으므로 안전하게 기존 세션 로그아웃 처리
+	         LoginManager.logout(session);
+	         
+	         // 로그인 페이지로 이동하여 새 비밀번호로 로그인하도록 유도
+	         return "redirect:/customer/signin";
+	      } else {
+	         System.out.println("비밀번호 변경 실패");
+	         return "customer/modifyPw"; // 실패 시 다시 변경 페이지로
+	      }
+	   }
+
+	
+	
 	
 	
 	

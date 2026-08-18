@@ -14,6 +14,8 @@
 	<p>이름: ${user.name}</p>
 	<p>
 		<a href="/main"> 메인페이지로 이동</a>	
+		
+		<a href="/customer/modifyPw">비밀번호 변경</a>
 	</p>
 </body>
 </html>
