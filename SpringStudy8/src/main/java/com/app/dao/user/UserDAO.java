@@ -13,5 +13,7 @@ public interface UserDAO {
 	
 	public User checkUserLogin(User user);
 
-	public int modifyUserPassword(User user);
+	public int modifyUser(User user);
+	
+	public int modifyUserPw(User user);
 }

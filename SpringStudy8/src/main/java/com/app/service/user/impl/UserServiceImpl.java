@@ -101,10 +101,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int modifyUserPassword(User user) {
-	
-		return userDAO.modifyUserPassword(user);
+	public int modifyUser(User user) {
+		
+		int result = userDAO.modifyUser(user);
+		
+		return result;
 	}
-	
-	
+
+	@Override
+	public int modifyUserPw(User user) {
+		int result = userDAO.modifyUserPw(user);
+		
+		return result;
+		
+	}
 }

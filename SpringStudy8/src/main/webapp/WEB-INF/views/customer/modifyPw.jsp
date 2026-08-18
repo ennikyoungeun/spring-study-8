@@ -7,10 +7,22 @@
 </head>
 <body>
 
-    <h1>비밀번호 변경</h1>
+    <h1>사용자 비밀번호 변경</h1>
+
+	<form action="" method="post">
+		<input type="hidden" name="id" value="${user.id}"><br>
+		${user.name}<br>
+<%-- 		사용자 이름 : <input type="text" name="name" value="${user.name}" disabled><br> --%>
+		사용자 이름 : <input type="text" name="name" value="${user.name}" readonly><br> 
+		<input type="hidden" name="userType" value="${user.userType}">
+		
+		변경할 비밀번호 : <input type="password" name="pw"><br> <br>
+		
+		<button type="submit">비밀번호 변경하기</button>
+	</form>
     
     <!-- 컨트롤러의 @PostMapping("/customer/modifyPw")로 데이터 전송 -->
-    <form action="/customer/modifyPw" method="post">
+  <!--   <form action="/customer/modifyPw" method="post">
         <p>
             <label for="newPassword">변경할 비밀번호 : </label>
      
@@ -21,7 +33,7 @@
             <button type="submit">비밀번호 변경하기</button>
             <a href="/customer/mypage">마이페이지로 돌아가기</a>
         </p>
-    </form>
+    </form> -->
 
 </body>
 </html>

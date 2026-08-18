@@ -16,6 +16,7 @@ public interface UserService {
 	public User checkUserLogin(User user);
 	public User findUserById(String id);
 	
-	public int modifyUserPassword(User user);
+	public int modifyUser(User user);
+	public int modifyUserPw(User user);
 	
 }
