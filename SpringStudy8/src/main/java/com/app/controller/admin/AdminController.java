@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.dto.room.Room;
 import com.app.dto.user.User;
+import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
 import com.app.service.user.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -203,9 +203,19 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/users")
-	public String users(Model model) {
-		List<User> userList = userService.findUserList();
+	public String users(Model model, UserSearchCondition userSearchCondition) {
+		
+		//검색조건
+		//검색조건O ->조건 검색 결과
+		//검색조건X -> 전체조회
+		System.out.println(userSearchCondition);
+		
+		
+		//List<User> userList = userService.findUserList();
+		List<User> userList = userService.findUserListBySearchCondition(userSearchCondition);
+		
 		model.addAttribute("userList",userList);
+		model.addAttribute("userSearchCondition",userSearchCondition);
 		
 		return "admin/users";
 	}
