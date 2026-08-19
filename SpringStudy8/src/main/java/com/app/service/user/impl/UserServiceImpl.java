@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 		//사용자 계정 추가시 사용메소드
 		//고객계정으로 추가!
 		//user.setUserType("CUS");
-		user.setUserType(CommonCode.USER_USETYPE_CUSTOMER);
+		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		
 		
 		int result = userDAO.saveUser(user);
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 		//관리자 계정 추가시 사용메소드
 		//관리자계정으로 추가!
 		//user.setUserType("ADM");
-		user.setUserType(CommonCode.USER_USETYPE_ADMIN);
+		user.setUserType(CommonCode.USER_USERTYPE_ADMIN);
 		
 		int result = userDAO.saveUser(user);
 				

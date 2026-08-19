@@ -66,7 +66,7 @@ public class CustomerController {
 		//id pw 맞으면 로그인 성공?
 		//userType 까지 비교 -> 일반인과 관리자 사용페이지 구분.
 		
-		user.setUserType(CommonCode.USER_USETYPE_CUSTOMER);
+		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		User loginUser = userService.checkUserLogin(user);
 		if (session.getAttribute("loginUserId") != null) {
 	        return "redirect:/customer/mypage";
