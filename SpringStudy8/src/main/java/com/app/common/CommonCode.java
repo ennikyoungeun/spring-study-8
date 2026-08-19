@@ -6,8 +6,8 @@ public interface CommonCode {
 	//공통 코드
 	
 	//USER
-	public static final String USER_USETYPE_CUSTOMER = "CUS";
-	public static final String USER_USETYPE_ADMIN = "ADM";
+	public static final String USER_USERTYPE_CUSTOMER = "CUS";
+	public static final String USER_USERTYPE_ADMIN = "ADM";
 	
 	//ROOM
 	public String ROOM_VIEWTYPE_OCEAN = "OCN";
