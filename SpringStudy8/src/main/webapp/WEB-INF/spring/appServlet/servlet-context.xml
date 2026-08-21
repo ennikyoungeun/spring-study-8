@@ -47,7 +47,7 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/costomer/**"/>
+			<mapping path="/customer/**"/>
 			<exclude-mapping path="/customer/signin"/>
 			<exclude-mapping path="/customer/signup"/>
 			<exclude-mapping path="/customer/checkDupIdJson"/>
@@ -55,11 +55,13 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 			<beans:bean class="com.app.interceptor.LoginInterceptor"></beans:bean>
 		</interceptor>
 		
-				<interceptor>
+		<interceptor>
 			<mapping path="/admin/**"/>
+			<exclude-mapping path="/admin/signin"/>
 			<beans:bean class="com.app.interceptor.AdminInterceptor"></beans:bean>
 		</interceptor>
-			
+		
+	
 	</interceptors>
 	
 	
