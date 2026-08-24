@@ -6,8 +6,8 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class User {
-
+public class UserSignupForm {
+	
 	@NotBlank(message = "아이디 필수임!!")
 	String id;
 	
@@ -17,4 +17,6 @@ public class User {
 	String name;
 	String userType;
 	// 사용자 계정종류 구분
+	// Customer   Admin
+	// CUS		  ADM
 }
