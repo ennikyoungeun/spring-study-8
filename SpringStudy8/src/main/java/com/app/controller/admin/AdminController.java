@@ -229,6 +229,22 @@ public class AdminController {
 			//Controller  사용자 -> 요청/응답 처리(흐름)
 			//Service  업무규칙, 비즈니스로직 핵심 처리
 			//DAO(Repository)  데이터 접근 처리 (DB, API ...)
+			
+			
+			//*************유효성 검증****************//
+			//서버 측에서 insert 처리 전에 값을 확인
+			
+			// 0) 자바 코드로 ..
+			if (user.getId() == null || user.getId().trim().equals("") ) {
+				//id공백으로 넘어옴. 입력 제대로 안됨. 유효성 검증 필터
+				log.info("아이디 유효성 검증 필터링 처리 {}",user);
+				return "admin/addUSer";
+			}
+			
+			if(user.getId().length() < 4 || user.getId().length() >12) {
+				log.info("아이디 유효성 검증 아이디 길이 안맞음 {}",user);
+				return "admin/addUSer";
+			}
 
 
 			int result = userService.saveCustomerUser(user);

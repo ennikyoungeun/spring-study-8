@@ -45,24 +45,24 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	</annotation-driven>		
 	
 	
-	<interceptors>
-		<interceptor>
-			<mapping path="/customer/**"/>
-			<exclude-mapping path="/customer/signin"/>
-			<exclude-mapping path="/customer/signup"/>
-			<exclude-mapping path="/customer/checkDupIdJson"/>
-			<exclude-mapping path="/customer/checkDupId"/>
-			<beans:bean class="com.app.interceptor.LoginInterceptor"></beans:bean>
-		</interceptor>
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/customer/**"/> -->
+<!-- 			<exclude-mapping path="/customer/signin"/> -->
+<!-- 			<exclude-mapping path="/customer/signup"/> -->
+<!-- 			<exclude-mapping path="/customer/checkDupIdJson"/> -->
+<!-- 			<exclude-mapping path="/customer/checkDupId"/> -->
+<!-- 			<beans:bean class="com.app.interceptor.LoginInterceptor"></beans:bean> -->
+<!-- 		</interceptor> -->
 		
-		<interceptor>
-			<mapping path="/admin/**"/>
-			<exclude-mapping path="/admin/signin"/>
-			<beans:bean class="com.app.interceptor.AdminInterceptor"></beans:bean>
-		</interceptor>
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/admin/**"/> -->
+<!-- 			<exclude-mapping path="/admin/signin"/> -->
+<!-- 			<beans:bean class="com.app.interceptor.AdminInterceptor"></beans:bean> -->
+<!-- 		</interceptor> -->
 		
 	
-	</interceptors>
+<!-- 	</interceptors> -->
 	
 	
 	
