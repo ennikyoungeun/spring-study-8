@@ -1,5 +1,6 @@
 package com.app.service.user.impl;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import com.app.dao.user.UserDAO;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.user.UserService;
+import com.app.util.SHA256Encryptor;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +39,15 @@ public class UserServiceImpl implements UserService {
 		//user.setUserType("CUS");
 		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		
-		
+		//계정등록/가입/추가시 작동하는 메소드 -> 입력받은 값 -> pw 비밀번호 암호화 -> Db 저장
+				try {
+					String encPw = SHA256Encryptor.encrypt( user.getPw() );
+					user.setPw(encPw);
+					System.out.println(encPw);
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}  //평문 비밀번호 암호화
+				
 		int result = userDAO.saveUser(user);
 		
 		return result;
@@ -92,6 +103,17 @@ public class UserServiceImpl implements UserService {
 		 * //성공 or 실패시 사유 코드화 1 성공 2 비번틀렸고 3 아이디 없고 4 휴면계정 5 정지
 		 * 
 		 */
+		 
+		//DB에 암호화된 비번이 들어있으면
+		// 사용자 입력 비번 -> 암호화처리 == DB비번값
+		
+		try {
+			String encPw = SHA256Encryptor.encrypt(user.getPw());  //평문 비번 암호화
+			user.setPw(encPw); //암호화 값으로 세팅
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
 		
 		//로그인처리 케이스 2) DB 쿼이에서 정보일치여부 비교수행
 		User loginUser = userDAO.checkUserLogin(user);
