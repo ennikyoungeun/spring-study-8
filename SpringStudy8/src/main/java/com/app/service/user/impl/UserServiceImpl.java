@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.common.CommonCode;
+import com.app.controller.study.quiz.quiz14.CoffeeBean;
 import com.app.dao.user.UserDAO;
 import com.app.dto.user.User;
+import com.app.dto.user.UserProfileImage;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.user.UserService;
 import com.app.util.SHA256Encryptor;
@@ -25,9 +27,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int saveUser(User user) {
-		
+
 		int result = userDAO.saveUser(user);
-		
+
 		return result;
 	}
 
@@ -159,17 +161,33 @@ public class UserServiceImpl implements UserService {
 
 		//매개변수 id 
 		// DB 에 있나?
-		
+
 		// id중복인가?
 		// 중복 -> true
 		// 중복X -> false
-		
+
 		User user = userDAO.findUserById(id);
-		
+
 		if(user == null) { //해당 아이디가 없다! -> 중복 X
 			return false;
 		} else { // 해당 아이디의 User 정보가 있다! -> 중복 O 
 			return true;
 		}
+	}
+
+	@Override
+	public int saveUserProfileImage(UserProfileImage userProfileImage) {
+
+		int result = userDAO.saveUserProfileImage(userProfileImage);
+		
+		return result;
+	}
+
+	@Override
+	public UserProfileImage findUserProfileImageById(String id) {
+
+		UserProfileImage userProfileImage = userDAO.findUserProfileImageById(id);
+		
+		return userProfileImage;
 	}
 }

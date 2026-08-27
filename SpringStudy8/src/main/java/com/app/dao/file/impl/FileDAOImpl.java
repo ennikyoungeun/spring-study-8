@@ -12,13 +12,21 @@ public class FileDAOImpl implements FileDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	
+
 	@Override
 	public int saveFileInfo(FileInfo fileInfo) {
 
 		int result = sqlSessionTemplate.insert("file_mapper.saveFileInfo", fileInfo);
-		
+
 		return result;
+	}
+
+	@Override
+	public FileInfo findFileInfoByFileName(String fileName) {
+
+		FileInfo fileInfo = sqlSessionTemplate.selectOne("file_mapper.findFileInfoByFileName", fileName);
+		
+		return fileInfo;
 	}
 
 }

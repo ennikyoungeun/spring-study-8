@@ -29,7 +29,9 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<beans:property name="suffix" value=".jsp"></beans:property>
 </beans:bean>
 
-<resources location="/resources/" mapping="/**"></resources>
+
+<resources location="file:///D:/fileStorage/" mapping="/fileStorage/**"/>
+	<resources location="/resources/" mapping="/**"></resources>
 
 <annotation-driven>
 		<message-converters>
